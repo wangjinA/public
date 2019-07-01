@@ -1,1 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
 
+<style>
+  * { box-sizing: border-box; margin: 0;padding: 0; }
+  label{
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-image: url('./star1.png');
+    background-size: 40px;
+    transition: .3s;
+  }
+  .starList{
+    display: flex;
+    flex-direction: row-reverse;
+    width: max-content;
+    margin: 200px auto;
+  }
+  .text{
+    height: 40px;
+    line-height: 40px;
+    overflow: hidden;
+    margin-left: 10px;
+  }
+  .text p{
+    transform: translateY(40px);
+    transition: .3s;
+  }
+  label:hover,
+  label:hover ~ label{
+    background-image: url('./star.png');
+  }
+  .starList input{
+    display: none;
+  }
+  input:checked ~ label{
+    background-image: url('./star.png');
+  }
+  .starList input:nth-child(1):checked ~ .text p:nth-of-type(3),
+  .starList input:nth-child(3):checked ~ .text p:nth-of-type(3){
+    transform: translateY(-80px);
+  }
+  .starList input:nth-child(5):checked ~ .text p:nth-of-type(2){
+    transform: translateY(-40px);
+  }
+  .starList input:nth-child(7):checked ~ .text p:nth-of-type(1),
+  .starList input:nth-child(9):checked ~ .text p:nth-of-type(1){
+    transform: translateY(0);
+  }
+</style>
+  <div class="starList">
+      <input type="radio" name="star" id="star-1" value="star-1">
+      <label for="star-1"></label>
+      <input type="radio" name="star" id="star-2" value="star-2">
+      <label for="star-2"></label>
+      <input type="radio" name="star" id="star-3" value="star-3">
+      <label for="star-3"></label>
+      <input type="radio" name="star" id="star-4" value="star-4">
+      <label for="star-4"></label>
+      <input type="radio" name="star" id="star-5" value="star-5">
+      <label for="star-5"></label>
+      <div class="text">
+        <p>差评</p>
+        <p>中评</p>
+        <p>好评</p>
+      </div>
+  </div>
+  <script>
+    document.querySelectorAll('input[name=star]').forEach(item=>{
+      item.onchange = function (e) {
+        let currentIndex = 0
+        let str = ''
+        document.querySelectorAll('input[name=star]').forEach((o, i)=> o==e.target && (currentIndex=i))
+        if(currentIndex == 0 || currentIndex == 1){
+          str = '好评'
+        }else if(currentIndex == 2){
+          str = '中评'
+        }else {
+          str = '差评'
+        }
+        console.log(str)
+      }
+    })
+  </script>
+</html>
